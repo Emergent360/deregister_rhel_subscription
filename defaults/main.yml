@@ -1,6 +1,7 @@
 ---
-# defaults file for register_rhel_subscription
+# defaults file for deregister_rhel_subscription
 reg_active: Yes
 rh_release: "8"
 rh_org_id: ""
 rh_activationkey: ""
+ec2_region: us-east-1
