@@ -1,2 +1,22 @@
 ---
 # tasks file for deregister_rhel_subscription
+
+- name: Deregister RHEL instance subscription
+  redhat_subscription:
+    state: absent
+    activationkey: "{{ rh_activationkey }}"
+    org_id: "{{ rh_org_id }}"
+    release: "{{ rh_release }}"
+  register: dereg_sub
+  until: dereg_sub is not failed
+  retries: 5
+
+- name: Update stage tag to deregistered
+  ec2_tag:
+    region: "{{ ec2_region }}"
+    resource: "{{ hostvars[inventory_hostname]['ec2_id'] }}"
+    state: present
+    tags:
+      Stage: "deregistered"
+  delegate_to: localhost
+  when: dereg_sub is not failed
