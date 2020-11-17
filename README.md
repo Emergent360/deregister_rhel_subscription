@@ -1,0 +1,1 @@
+# deregister_rhel_subscription
