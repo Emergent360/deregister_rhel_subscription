@@ -1,6 +1,11 @@
 ---
 # tasks file for deregister_rhel_subscription
 
+- name: Unregister insights-client
+  ansible.builtin.command: >
+    insights-client --unregister
+  become: yes
+  
 - name: Deregister RHEL instance subscription
   redhat_subscription:
     state: absent
@@ -12,11 +17,6 @@
   until: dereg_sub is not failed
   retries: 5
 
-- name: Unregister insights-client
-  ansible.builtin.command: >
-    insights-client --unregister
-  become: yes
-  
 - name: Update stage tag to deregistered
   ec2_tag:
     region: "{{ ec2_region }}"
