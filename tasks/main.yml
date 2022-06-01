@@ -15,7 +15,8 @@
 - name: Unregister insights-client
   ansible.builtin.command: >
     insights-client --unregister
-
+  become: yes
+  
 - name: Update stage tag to deregistered
   ec2_tag:
     region: "{{ ec2_region }}"
