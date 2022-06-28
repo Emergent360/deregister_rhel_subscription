@@ -5,6 +5,7 @@
   ansible.builtin.command: >
     insights-client --unregister
   become: yes
+  ignore_errors: yes
   
 - name: Deregister RHEL instance subscription
   redhat_subscription:
