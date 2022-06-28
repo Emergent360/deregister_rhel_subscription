@@ -16,6 +16,7 @@
   register: dereg_sub
   until: dereg_sub is not failed
   retries: 5
+  ignore_errors: yes
 
 - name: Update stage tag to deregistered
   ec2_tag:
